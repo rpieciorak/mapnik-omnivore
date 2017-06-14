@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mapbox/mapnik-omnivore"
+    "url": "https://github.com/rpieciorak/mapnik-omnivore"
   },
   "devDependencies": {
     "coveralls": "~2.11.1",
