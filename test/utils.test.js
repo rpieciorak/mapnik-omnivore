@@ -130,3 +130,34 @@ tape('[SPATIAL RESOLUTIONS] Get spatial resolutions / valid spatial resolutions 
 
   assert.end();
 });
+
+tape('[DYNAMIC MINZOOM] Get dynamic minZoom / small raster', function(assert) {
+  var spatialResolutions = utils.getSpatialResolutions();
+  var tileSize = 512;
+  var extent = [18.683872388012283, 50.27739459081697, 18.685657559975205, 50.27850451326515];
+  var minZoom = utils.getDynamicMinZoom(spatialResolutions, extent, tileSize);
+  var expectedMinZoom = 15;
+  assert.equals(minZoom, expectedMinZoom);
+
+  assert.end();
+});
+
+tape('[DYNAMIC MINZOOM] Get dynamic minZoom / more then size limit raster', function(assert) {
+  var spatialResolutions = utils.getSpatialResolutions();
+  var tileSize = 512;
+  var extent = [17.683872388012283, 48.27739459081697, 18.685657559975205, 50.27850451326515];
+  var minZoom = utils.getDynamicMinZoom(spatialResolutions, extent, tileSize);
+  var expectedMinZoom = null;
+  assert.equals(minZoom, expectedMinZoom);
+  assert.end();
+});
+
+tape('[DYNAMIC MINZOOM] Get dynamic minZoom / whole world extent', function(assert) {
+  var spatialResolutions = utils.getSpatialResolutions();
+  var tileSize = 512;
+  var extent = [-180, -85.0511287798066, 180, 85.0511287798066];
+  var minZoom = utils.getDynamicMinZoom(spatialResolutions, extent, tileSize);
+  var expectedMinZoom = null;
+  assert.equals(minZoom, expectedMinZoom);
+  assert.end();
+});
