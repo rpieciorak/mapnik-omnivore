@@ -1,5 +1,12 @@
 # Changelog
 
+## 9.0.0
+
+- Try/catch forward projections in raster extent method
+- clamp minZoom for vector data to `process.env.DEFAULT_SMALLEST_MIN_ZOOM` (defaults to 4) for files under `process.env.SMALLEST_MIN_ZOOM_FILE_SIZE` (defaults to 10MB)
+- update mapnik to 3.7.0
+- update gdal to 0.9.6
+
 ## 8.4.1
 
 - Increase raster maxzoom to z25

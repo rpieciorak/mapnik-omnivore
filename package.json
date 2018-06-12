@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/mapnik-omnivore",
-  "version": "8.4.1-smartgeomatic.1",
+  "version": "9.0.0-smartgeomatic.1",
   "description": "Node module that returns metadata of spatial files.",
   "main": "index.js",
   "keywords": [
@@ -12,12 +12,12 @@
     "registry": "https://smartgeomatic.org/npm/"
   },
   "dependencies": {
-    "@mapbox/sphericalmercator": "~1.0.5",
-    "@mapbox/mapbox-file-sniff": "~1.0.0",
+    "@mapbox/sphericalmercator": "~1.1.0",
+    "@mapbox/mapbox-file-sniff": "~1.0.4",
     "srs": "~1.2.0",
-    "mapnik": "~3.6.0",
-    "gdal": "~0.9.3",
-    "queue-async": "~1.2.0"
+    "mapnik": "~3.7.0",
+    "gdal": "~0.9.6",
+    "queue-async": "~1.2.1"
   },
   "repository": {
     "type": "git",

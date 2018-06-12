@@ -16,6 +16,30 @@ Currently supports the following file types:
 - `csv` : must be valid geo CSV, and can be in the form of `csv`, `txt`, or `tsv`
 - `shp` : In order to set the projection, the `.prj` file must be in the same directory and have the same name as the `.shp` file
 
+## Calculating zoom levels for tiling
+
+For vector datasets:
+
+- calculate `smallestMinZoom` and `smallestMaxZoom`
+- starting from zoom level 22 start loop decrementing zoom level by 1 in every iteration
+- count how many tiles should be rendered to cover dataset extent fo current zoom level
+- calculate metric to asses if current zoom level is good enough
+- metric is defined as file size (in bytes) dived by the number of tiles from step 3 and is rough estimate how many data features will be on single tile
+- test if metric is below max zoom threshold (if yes then store current zoom level as candidate for max zoom)
+- test if metric is below min zoom threshold (if yes then store current zoom level as candidate for min zoom and break zoom level loop)
+- start next zoom level loop iteration (decrementing zoom level by 1)
+- when zoom level loop will end (by iterating through all zoom levels of by exiting loop)
+   - choose max(candidate for max zoom, smallestMaxZoom) as max zoom
+   - choose min(candidate for min zoom, smallestMinZoom) as min zoom
+   - choose min(min zom, `DEFAULT_SMALLEST_MIN_ZOOM`) as min zoom for file with size under `SMALLEST_MIN_ZOOM_FILE_SIZE`
+   - finally set min zoom as min(min zoom, max zoom) and max zoom as max(min_zoom, max_zoom)
+
+## Environment
+
+- `DEFAULT_SMALLEST_MAX_ZOOM` - the smallest max zoom a datasource should be tiled to [`6`]
+- `DEFAULT_SMALLEST_MIN_ZOOM` - the smallest min zoom a datasource should be tiled from [`4`]
+- `SMALLEST_MAX_ZOOM_FILE_SIZE` - upper file size limit to use max zoom overriding based on gemetry type (max zoom for files above this limit will not be overriden)
+- `SMALLEST_MIN_ZOOM_FILE_SIZE` - upper file size limit to use min zoom overriding (min zoom for files above this limit will not be overriden)
 
 ## Javascript Usage
 
